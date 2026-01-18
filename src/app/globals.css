@@ -1,16 +1,52 @@
 @import "tailwindcss";
 
+/* KONFIGURASI TEMA TAILWIND v4 
+  Ini menghubungkan variabel CSS di bawah agar bisa dipanggil 
+  dengan class seperti: bg-primary, text-accent, border-muted
+*/
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-fg: var(--secondary-foreground);
+
+  --color-success: var(--success); /* Untuk status "Terdanai" */
+  --color-muted: var(--muted);
+}
+
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #171717;
-  }
+    /* --- OPSI 1: THE TRUSTWORTHY (Biru & Oranye) --- */
+    /* Rekomendasi utama untuk aplikasi umum (Bencana & Sakit) */
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #0a0a0a;
-      --foreground: #ededed;
-    }
+    /* Background & Text (Keep it clean) */
+    --background: #ffffff;
+    --foreground: #0f172a; /* Slate 900 (Tidak hitam pekat agar nyaman dibaca) */
+
+    /* Primary: Royal Blue (Kepercayaan & Keamanan) */
+    --primary: #2563eb;
+    --primary-foreground: #ffffff;
+
+    /* Accent: Bright Orange (Tombol Donasi - Urgensi & Optimisme) */
+    --accent: #f97316;
+    --accent-foreground: #ffffff;
+
+    /* Secondary: Soft Blue-Gray (Elemen pendukung/Card background) */
+    --secondary: #f1f5f9;
+    --secondary-foreground: #1e293b;
+
+    /* Status: Green (Harapan/Dana Terkumpul) */
+    --success: #16a34a;
+
+    /* Muted: Gray (Teks tanggal, footer) */
+    --muted: #94a3b8;
   }
 
   html,
@@ -20,43 +56,49 @@
   }
 
   body {
-    color: var(--foreground);
+    color: var(--primary);
     background: var(--background);
-    font-family: var(--font-inter), sans-serif;
+    /* Menggunakan font Inter seperti request awal */
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  /* Styling tambahan untuk keterbacaan cerita donasi */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    letter-spacing: -0.025em; /* Tight tracking agar terlihat modern */
   }
 
   code {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
     border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     font-family: var(--font-source-code-pro), monospace;
     font-size: 0.875rem;
-    padding: 0.25rem 0.5rem calc(0.25rem + 2px);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    code {
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    padding: 0.25rem 0.5rem;
   }
 
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    border-color: var(--muted); /* Default border color */
   }
 
   a {
     color: inherit;
     text-decoration: none;
+    transition: opacity 0.2s;
   }
 
-  @media (prefers-color-scheme: dark) {
-    html {
-      color-scheme: dark;
-    }
+  a:hover {
+    opacity: 0.8;
   }
 }
